@@ -243,6 +243,7 @@ public class SAMLServlet extends HttpServlet{
         //Get the SAMLResponse and RelayState
         String encodedResponse = request.getParameter("SAMLResponse");
         String relayState = request.getParameter("RelayState");
+        System.out.println(encodedResponse + "  moh " + relayState);
         if ((relayState == null) || ( relayState.equals(""))) relayState = "/";
 
         //validate the response
@@ -263,6 +264,7 @@ public class SAMLServlet extends HttpServlet{
             response.addCookie(identityCookie);
         } catch (Exception e) {
             response.sendError(401, "Access Denied: " + e.getMessage());
+            e.printStackTrace();
             return;
         }
         response.sendRedirect(relayState);
